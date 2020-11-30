@@ -66,19 +66,22 @@ while True:
 		print(Fore.RED + "Closing ads and tabs")
 		ct = datetime.datetime.now() 
 		print("current time:-", ct) 
-		for tab in browser.window_handles:
-			try:
-				browser.switch_to.window(tab)
-				browser.save_screenshot(str(page) + "_page.png")
-				browser.close()
-				print("Closed " + str(tab))
-				ct = datetime.datetime.now() 
-				print("current time:-", ct) 
-				page = page + 1
-			except:
-				print("Failed to close")
-				ct = datetime.datetime.now() 
-				print("current time:-", ct) 
+		try:
+			for tab in browser.window_handles:
+				try:
+					browser.switch_to.window(tab)
+					browser.save_screenshot(str(page) + "_page.png")
+					browser.close()
+					print("Closed " + str(tab))
+					ct = datetime.datetime.now() 
+					print("current time:-", ct) 
+					page = page + 1
+				except:
+					print("Failed to close")
+					ct = datetime.datetime.now() 
+					print("current time:-", ct)
+		except:
+			print("Failed to close all tabs") 
 	finally:
 		try:
 			browser.quit()
