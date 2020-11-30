@@ -49,17 +49,19 @@ while True:
 		print("current time:-", ct) 
 		elements = browser.find_elements_by_tag_name('iframe')
 		for element in elements:
-			if "jads" in element.get_attribute("src"):
-				try:
-					element.click()
-					print("Clicked " + str(element))
-					ct = datetime.datetime.now() 
-					print("current time:-", ct) 
-				except:
-					print("Failed to click " +str(element))
-					ct = datetime.datetime.now() 
-					print("current time:-", ct) 
-		
+			try:
+				if "jads" in element.get_attribute("src"):
+					try:
+						element.click()
+						print("Clicked " + str(element))
+						ct = datetime.datetime.now() 
+						print("current time:-", ct) 
+					except:
+						print("Failed to click " +str(element))
+						ct = datetime.datetime.now() 
+						print("current time:-", ct) 
+			except:
+				print("Element detached from dom")
 		page = 1
 		print(Fore.RED + "Closing ads and tabs")
 		ct = datetime.datetime.now() 
