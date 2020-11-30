@@ -52,11 +52,14 @@ while True:
 		page = 1
 		print(Fore.RED + "Closing ads and tabs")
 		for tab in browser.window_handles:
-			browser.switch_to.window(tab)
-			browser.save_screenshot(str(page) + "_page.png")
-			browser.close()
-			print("Closed " + str(tab))
-			page = page + 1
+			try:
+				browser.switch_to.window(tab)
+				browser.save_screenshot(str(page) + "_page.png")
+				browser.close()
+				print("Closed " + str(tab))
+				page = page + 1
+			except:
+				print("Failed to close")
 	finally:
 		try:
 			browser.quit()
