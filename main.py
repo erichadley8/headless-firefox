@@ -1,4 +1,5 @@
 import os
+import datetime
 from colorama import Fore, Back
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -34,32 +35,48 @@ while True:
 		body.click()
 		browser.save_screenshot("popunder.png")
 		print(Fore.CYAN + "Clicked for popunder")
+		ct = datetime.datetime.now() 
+		print("current time:-", ct) 
 		browser.switch_to.window(browser.window_handles[1])
 		print("Switched back from popunder")
+		ct = datetime.datetime.now() 
+		print("current time:-", ct) 
 
 
 		### Ads
 		print(Fore.YELLOW + "Getting ads and clicking ads")
+		ct = datetime.datetime.now() 
+		print("current time:-", ct) 
 		elements = browser.find_elements_by_tag_name('iframe')
 		for element in elements:
 			if "jads" in element.get_attribute("src"):
 				try:
 					element.click()
 					print("Clicked " + str(element))
+					ct = datetime.datetime.now() 
+					print("current time:-", ct) 
 				except:
 					print("Failed to click " +str(element))
+					ct = datetime.datetime.now() 
+					print("current time:-", ct) 
 		
 		page = 1
 		print(Fore.RED + "Closing ads and tabs")
+		ct = datetime.datetime.now() 
+		print("current time:-", ct) 
 		for tab in browser.window_handles:
 			try:
 				browser.switch_to.window(tab)
 				browser.save_screenshot(str(page) + "_page.png")
 				browser.close()
 				print("Closed " + str(tab))
+				ct = datetime.datetime.now() 
+				print("current time:-", ct) 
 				page = page + 1
 			except:
 				print("Failed to close")
+				ct = datetime.datetime.now() 
+				print("current time:-", ct) 
 	finally:
 		try:
 			browser.quit()
